@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale = 1.0 , user-scalable = 0">
+
+    <link rel="stylesheet" href="src\main/resources/static/css/style.css">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <title>Document</title>
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="catalog__container subcontainer">
+        <div class="catalog__title">
+            <p>Доставка квітів в Харкові</p>
+        </div>
+
+        <div class="catalog__nav--box">
+            <p>Натиснить для замовлення</p>
+
+            <form th:action="@{/main}" method="post" th:object="${order}">
+                <div class="catalog__nav">
+                    <div class="catalog__nav--icon"><img src="./icons/kr.png"></div>
+
+                    <div class="dropdown-content">
+                        <p class="dropbtn">Ціна ...</p>
+                        <div class="inp"
+                             th:each="price : ${prices}">
+                            <input type="checkbox" id="200"
+                                   th:field="*{price}"
+                                   th:value="${price.id}">
+                            <label for="200" th:text="${price.price}"></label>
+                        </div>
+                    </div>
+
+
+                    <div class="dropdown-content">
+                        <p class="dropbtn">Квіти ...</p>
+                        <div class="inp"
+                             th:each="flower : ${name_of_flowers}">
+                            <input type="checkbox" id="tr"
+                                   th:field="*{name}"
+                                   th:value="${flower.id}">
+                            <label for="tr" th:text="${flower.name}"></label>
+                        </div>
+                    </div>
+
+
+                    <div class="dropdown-content">
+                        <p class="dropbtn">Кому ...</p>
+                        <div class="inp"
+                             th:each="sex : ${sexs}">
+                            <input type="checkbox" id="women"
+                                   th:field="*{sex}"
+                                   th:value="${sex.id}">
+                            <label for="women" th:text="${sex.sex}"></label>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-content">
+                        <p class="dropbtn">Привід ...</p>
+                        <div class="inp"
+                             th:each="reason : ${reasons}">
+                            <input type="checkbox" id="dn"
+                                   th:field="*{reason}"
+                                   th:value="${reason.id}">
+                            <label for="dn" th:text="${reason.reason}"></label>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-content">
+                        <p class="dropbtn">Стиль ...</p>
+                        <div class="inp"
+                             th:each="style : ${styles}">
+                            <input type="checkbox" id="vi"
+                                   th:field="*{style}"
+                                   th:value="${style.id}">
+                            <label for="vi" th:text="${style.style}"></label>
+                        </div>
+                    </div>
+
+
+                    <div class="catalog__button">
+                        <button type="submit" class="catalog__nav--btn b1">Відправити <br>замовлення</button>
+                        <button type="reset" class="catalog__nav--btn b2">Скасувати<br>замовлення</button>
+                    </div>
+                    <div class="catalog__thanks">
+                        <p>Дякуємо Ваше замовлення прийнято<br>
+                            Буде обролено протягом 7 секунд</p>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script th:src="@{/js/script.js}" defer></script>
+<script src="./js/script.js" defer></script>
+
+</body>
+
+</html>

@@ -1,0 +1,299 @@
+// обновлять страницу после смены стиля рут ....
+
+@import "null.scss";
+@import "var.scss";
+@import "basestyle.scss";
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@function toRem($value) {
+	// Базовый размер шрифта (обычно 16px)
+	$baseFontSize: 16;
+	// Вычисление значения в rem
+	@return ($value / $baseFontSize) * 1rem;
+}
+// !Миксины ================================================================================
+// adaptiveValue = ($property-css стиль, $pcSize-максимальный параметр, $mobSize-минимальный параметр)
+
+// $minWidth: 320; // Минимальная ширина страницы
+// // $maxWidth: 1440; // Ширина полотна (макета)
+// $maxWidthContainer: toRem(1230); // Ширина ограничивающего контейнера
+// $containerPadding: toRem(30); // Отступ от контейнера по 15 слева и справа
+// $containerWidth: $maxWidthContainer + $containerPadding; // Ширина срабатывания первого брекпоинта
+// Брейк-поинты------------------------------------------------------------------------------
+// $pc: em($containerWidth);
+// $pc: $containerWidth;
+// $tablet: em(991.98);
+// $tablet: toRem(991.98);
+// // $mobile: em(767.98);
+// $mobile: toRem(767.98);
+// // $mobileSmall: em(479.98);
+// $mobileSmall: toRem(479.98);
+
+$maxWidth: 1920; // Ширина полотна (макета)
+
+@mixin adaptiveValue($property, $pcSize, $mobSize) {
+	$addSize: $pcSize - $mobSize;
+	$addMobSize: $addSize + $addSize * 0.7;
+
+	@media (min-width: toRem(1920)) {
+		#{$property}: #{$pcSize + px};
+	}
+
+	@media (max-width: toRem(1920)) {
+		@media (max-width: 1920px) {
+			#{$property}: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 767px) / #{$maxWidth}));
+		}
+
+		// @media (max-width: 767px) {
+		// 	#{$property}: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
+		// }
+	}
+}
+//   @include adaptiveValue ($property , $pcSize, $mobSize);
+
+// ..................................................................................
+// общие стили
+[class*="__container"] {
+	max-width: 1342px;
+	padding: 0 15px;
+	margin: 0 auto;
+}
+
+.subcontainer {
+	max-width: toRem(1085);
+	margin: 0 auto;
+}
+
+// ......................................................................................
+
+.catalog {
+	@include adaptiveValue("padding-top", 50, 20);
+	@include adaptiveValue("padding-bottom", 50, 40);
+	background-image: url(../main-hero/fone.svg);
+	background-repeat: no-repeat;
+	background-position: right;
+	background-size: contain;
+
+	@media (max-width: toRem(491)) {
+		background-image: none;
+	}
+
+	&__link {
+		@include adaptiveValue("max-width", 600, 350);
+		text-align: end;
+	}
+
+	&__container {
+		@include adaptiveValue("margin-top", 100, 50);
+	}
+
+	&__title {
+		text-align: center;
+		background-color: #a93b58a1;
+		border-radius: toRem(10);
+	}
+
+	&__title p {
+		font-family: "PlayfairDisplay-Bold";
+		@include adaptiveValue("font-size", 34, 28);
+		color: #faf7f8;
+		line-height: 1.7;
+	}
+}
+
+.catalog__nav--box {
+	position: relative;
+	margin-top: 10px;
+	background-color: #a93b58a1;
+	border-radius: 10px;
+	cursor: pointer;
+
+	& p {
+		font-family: "PlayfairDisplay-Bold";
+		@include adaptiveValue("font-size", 34, 28);
+		color: #faf7f8;
+		line-height: 1.7;
+		text-align: center;
+	}
+}
+
+.catalog__nav {
+	display: none;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	justify-content: space-between;
+	border-radius: 10px;
+	background-color: #a93b59;
+	height: toRem(450);
+	box-shadow: 0px 20px 9px #a93b58df;
+	z-index: 40;
+
+	@media (max-width: toRem(1025)) {
+		flex-direction: column;
+		justify-content: start;
+		align-items: center;
+		height: toRem(1400);
+	}
+}
+
+.catalog__nav--btn,
+.catalog__thanks p {
+	font-family: "PlayfairDisplay-Bold";
+	@include adaptiveValue("font-size", 18, 12);
+	color: #faf8f8;
+	line-height: 1.7;
+	border-radius: 10px;
+	background-color: #a60b35;
+	padding: toRem(10);
+}
+.catalog__button {
+	position: absolute;
+	@include adaptiveValue("left", 416, 446);
+	bottom: toRem(20);
+	@media (max-width: toRem(1025)) {
+		left: toRem(120);
+	}
+}
+.catalog__nav--icon {
+	display: none;
+	margin: toRem(14) 0;
+
+	@media (max-width: toRem(1025)) {
+		display: block;
+	}
+}
+
+.b1 {
+	bottom: toRem(10);
+	left: toRem(470);
+	border: 1px solid #b40b38;
+	box-shadow: -7px 7px 9px #f5f4f4bc;
+	line-height: 1.1;
+}
+
+.b2 {
+	bottom: toRem(10);
+	right: toRem(50);
+	border: 1px solid #b40b38;
+	box-shadow: 7px 7px 9px #f5f4f4bc;
+	line-height: 1.1;
+}
+
+.catalog__thanks {
+	display: none;
+	position: absolute;
+	width: toRem(360);
+	bottom: toRem(10);
+	@include adaptiveValue("left", 340, 330);
+	box-shadow: 7px 7px 9px #f5f4f4bc;
+
+	@media (max-width: toRem(769)) {
+		left: toRem(120);
+	}
+	@media (max-width: toRem(427)) {
+		left: toRem(20);
+		font-size: toRem(18);
+	}
+	& p {
+		letter-spacing: 1.3px;
+		@media (max-width: toRem(427)) {
+			font-size: toRem(18);
+		}
+	}
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+
+	& p {
+		@include adaptiveValue("font-size", 20, 18);
+	}
+
+	@media (width: toRem(1025)) {
+		border: 1px solid rgb(250, 249, 249);
+		@include adaptiveValue("width", 1025, 200);
+	}
+}
+
+.dropbtn {
+	background-image: url(../icons/chevron.png);
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+	border-radius: 10px;
+
+	@media (max-width: toRem(1025)) {
+		@include adaptiveValue("width", 1025, 470);
+		border-bottom: 1px solid white;
+	}
+
+	&:hover,
+	:focus {
+		background-color: #e2436e;
+	}
+}
+
+.inp input[type="checkbox"] {
+	width: toRem(16);
+	height: toRem(16);
+	cursor: pointer;
+}
+
+.dropdown-content {
+	padding: toRem(20);
+	width: toRem(200);
+	text-align: center;
+	align-items: center;
+	background-color: #e2436e;
+	border-radius: 10px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
+	@media (max-width: toRem(1025)) {
+		@include adaptiveValue("width", 1025, 510);
+		margin-top: toRem(5);
+		border-bottom: 1px solid white;
+	}
+
+	& button {
+		padding: toRem(15);
+		border-radius: 10px;
+		font-family: "SourceSansPro-Bold";
+		color: white;
+		background-color: #6d0924;
+		margin-top: toRem(10);
+	}
+
+	& label {
+		border-bottom: 1px solid rgba(255, 255, 255, 0.455);
+		color: white;
+		padding: 12px 16px;
+		// font-size: toRem(20);
+		@include adaptiveValue("font-size", 20, 18);
+		text-decoration: none;
+		display: block;
+
+		&:hover {
+			background-color: #6d092437;
+		}
+	}
+
+	& .inp {
+		position: relative;
+	}
+
+	& input {
+		position: absolute;
+		top: 25%;
+		left: 0;
+	}
+
+	& p {
+		font-size: toRem(20);
+		font-family: "SourceSansPro-Light";
+		color: white;
+		background-color: #a93b59;
+		font-weight: 900;
+	}
+}
