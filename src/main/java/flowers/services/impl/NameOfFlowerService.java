@@ -13,7 +13,6 @@ public class NameOfFlowerService {
 
     private NameOfFlowerRepository nameOfFlowerRepository;
 
-
     public List<NameOfFlower> findAll() {
         return nameOfFlowerRepository.findAll();
     }
