@@ -1,0 +1,44 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://dpg-ct4f3lq3esus73ff9s80-a/flowersdb_mgd9
+    username: flowersdb_mgd9_user
+    password: SSjWuqBACEyGjSoXWRKSZuNptyY4k4Yn
+    hikari:
+      minimum-idle: 3
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      pool-name: HikariPool
+  jpa:
+    database: POSTGRESQL
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+
+  sql:
+    init:
+      platform: postgres
+  web:
+    resources:
+      static-locations: classpath:/static/
+
+
+#spring:
+#  datasource:
+#    url: jdbc:h2:mem:testdb
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#    password:
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.H2Dialect
+
+
+#    datasource:
+#      url: jdbc:postgresql://localhost:5432/flowers
+#      username: postgres
+#      password: postgres
+#      driver-class-name: org.postgresql.Driver
