@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://flowersdb_mgd9_user:SSjWuqBACEyGjSoXWRKSZuNptyY4k4Yn@dpg-ct4f3lq3esus73ff9s80-a/flowersdb_mgd9
+    url: jdbc:postgresql://dpg-ct4f3lq3esus73ff9s80-a/flowersdb_mgd9
     username: flowersdb_mgd9_user
     password: SSjWuqBACEyGjSoXWRKSZuNptyY4k4Yn
     hikari:
